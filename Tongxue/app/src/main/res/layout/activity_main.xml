@@ -8,9 +8,15 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.fandexian.tongxue.MainActivity">
+    
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="提交到github服务器" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="第二次提交更改的代码" />
 </RelativeLayout>
