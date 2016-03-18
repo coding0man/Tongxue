@@ -4,7 +4,8 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
 
-    <color name="mainColor">#25e0d1</color>
-    <color name="defaultTextColor">#999999</color>
-    <color name="mainBgColor">#F9FAFB</color>
+    <color name="mainColor">#d03434</color>
+    <color name="defaultTextColor">#80828d</color>
+    <color name="mainBgColor">#F8f8f8</color>
+    <color name="white">#FFFFFF</color>
 </resources>

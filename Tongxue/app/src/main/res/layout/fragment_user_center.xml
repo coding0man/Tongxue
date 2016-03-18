@@ -1,17 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/mainBgColor">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="120dp"
+        android:layout_height="160dp"
         android:id="@+id/id_center_title"
-        android:background="@color/mainColor">
+        android:alpha="30">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="160dp"
+            android:id="@+id/id_center_bg_img"
+            android:alpha="30"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/mainColor"
+            android:alpha="0.3"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/id_title_text"
+            android:layout_marginTop="8dp"
             android:layout_centerHorizontal="true"
             android:textColor="@android:color/white"
             android:textSize="18dp"
@@ -19,8 +31,8 @@
         <de.hdodenhof.circleimageview.CircleImageView
             xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/id_center_head"
-            android:layout_width="72dp"
-            android:layout_height="72dp"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
             android:layout_marginTop="16dp"
             android:layout_centerInParent="true"
             android:src="@mipmap/ic_launcher"
@@ -41,11 +53,12 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="48dp"
+        android:layout_height="100dp"
         android:paddingTop="4dp"
         android:layout_below="@+id/id_center_title"
         android:layout_marginTop="24dp"
-        android:id="@+id/id_ll">
+        android:id="@+id/id_ll"
+        android:background="@color/white">
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -54,17 +67,18 @@
             android:layout_weight="1"
             android:weightSum="2">
             <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="24dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:id="@+id/id_main_img1"
+                android:layout_marginTop="16dp"
                 android:layout_gravity="center_horizontal"
-                android:src="@mipmap/icon_homepage_default"/>
+                android:src="@mipmap/icon_center_fabu"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="24dp"
                 android:text="已发布"
                 android:id="@+id/id_main_tv1"
-                style="@style/main_bottom_text"/>
+                style="@style/center_text"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="0dp"
@@ -73,17 +87,18 @@
             android:id="@+id/id_ll_shoucang"
             android:layout_weight="1">
             <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="24dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:id="@+id/id_main_img2"
+                android:layout_marginTop="16dp"
                 android:layout_gravity="center_horizontal"
-                android:src="@mipmap/icon_fabu_default"/>
+                android:src="@mipmap/icon_center_shoucang"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="24dp"
                 android:text="已收藏"
                 android:id="@+id/id_main_tv2"
-                style="@style/main_bottom_text"/>
+                style="@style/center_text"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="0dp"
@@ -92,17 +107,18 @@
             android:id="@+id/id_ll_xinxi"
             android:layout_weight="1">
             <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="24dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:id="@+id/id_main_img3"
+                android:layout_marginTop="16dp"
                 android:layout_gravity="center_horizontal"
-                android:src="@mipmap/icon_user_center_default"/>
+                android:src="@mipmap/icon_center_grxx"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="24dp"
                 android:text="个人信息"
                 android:id="@+id/id_main_tv3"
-                style="@style/main_bottom_text"/>
+                style="@style/center_text"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="0dp"
@@ -111,17 +127,18 @@
             android:id="@+id/id_ll_shezhi"
             android:layout_weight="1">
             <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="24dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:id="@+id/id_main_img4"
+                android:layout_marginTop="16dp"
                 android:layout_gravity="center_horizontal"
-                android:src="@mipmap/icon_user_center_default"/>
+                android:src="@mipmap/icon_center_shezhi"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="24dp"
                 android:text="设置"
                 android:id="@+id/id_main_tv4"
-                style="@style/main_bottom_text"/>
+                style="@style/center_text"/>
         </LinearLayout>
 
 
