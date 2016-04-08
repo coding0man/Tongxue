@@ -6,8 +6,8 @@ android {
 
     defaultConfig {
         applicationId "com.fandexian.tongxue"
-        minSdkVersion 19
-        targetSdkVersion 23
+        minSdkVersion 16
+        targetSdkVersion 16
         versionCode 1
         versionName "1.0"
     }
@@ -19,10 +19,23 @@ android {
     }
 }
 
+
+repositories{
+    flatDir{
+        dirs 'libs' //就是你放aar的目录地址
+    }
+}
 dependencies {
     compile 'de.hdodenhof:circleimageview:2.0.0'
     compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile name :'SMSSDK-2.0.2',ext:'aar'
+    compile name :'SMSSDKGUI-2.0.2',ext:'aar'
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:23.1.0'
     compile files('libs/universal-image-loader-1.9.5.jar')
+
+    compile files('libs/MobCommons-2016.0303.1229.jar')
+    compile files('libs/MobTools-2016.0303.1229.jar')
+
+
 }

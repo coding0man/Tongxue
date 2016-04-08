@@ -2,6 +2,7 @@ package com.fandexian.tongxue.fragments;
 
 import android.app.Fragment;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
@@ -11,6 +12,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.fandexian.tongxue.R;
+import com.fandexian.tongxue.activitys.LoginActivity;
+import com.fandexian.tongxue.activitys.RegisterActivity;
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
 import com.nostra13.universalimageloader.cache.memory.impl.UsingFreqLimitedMemoryCache;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
@@ -27,11 +30,14 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 /**
  * Created by dexian.fan on 2016/3/17.
  */
 public class UserCenter extends Fragment {
     String url;
+    CircleImageView centerHead;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -50,8 +56,20 @@ public class UserCenter extends Fragment {
 
 
         ImageLoader.getInstance().displayImage(url,(ImageView)view.findViewById(R.id.id_center_bg_img),options);
+
+       centerHead= (CircleImageView) view.findViewById(R.id.id_center_head);
+
+        centerHead.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(getActivity(), LoginActivity.class);
+                startActivity(intent);
+            }
+        });
+
         //ImageLoader.getInstance().displayImage(url,(ImageView)view.findViewById(R.id.id_center_head),options);
         return view;
+
     }
     public static void initImageLoader(Context context) {
         //缓存文件的目录

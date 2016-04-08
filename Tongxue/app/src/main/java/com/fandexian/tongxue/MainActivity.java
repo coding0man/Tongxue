@@ -21,6 +21,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
     private TextView tv1,tv2,tv3;
     private Fragment home,fabu,user_center;
     private FragmentManager fm = getFragmentManager();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

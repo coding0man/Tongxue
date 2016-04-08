@@ -8,6 +8,8 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.fandexian.tongxue.R;
+
 import java.util.List;
 import java.util.Map;
 
@@ -43,12 +45,12 @@ public class MyAdapter extends BaseAdapter {
         ViewHolder viewHolder = null;
         if(convertView == null){
             viewHolder = new ViewHolder();
-            convertView = LayoutInflater.from(context).inflate(R.layout.item,parent,false);
-            viewHolder.imageView = (ImageView) convertView.findViewById(R.id.id_item_img);
-            viewHolder.title = (TextView) convertView.findViewById(R.id.id_item_title);
-            viewHolder.describe = (TextView) convertView.findViewById(R.id.id_item_des);
-            viewHolder.price = (TextView) convertView.findViewById(R.id.id_item_pri);
-            viewHolder.time = (TextView) convertView.findViewById(R.id.id_item_time);
+//            convertView = LayoutInflater.from(context).inflate(R.layout.item,parent,false);
+//            viewHolder.imageView = (ImageView) convertView.findViewById(R.id.id_item_img);
+//            viewHolder.title = (TextView) convertView.findViewById(R.id.id_item_title);
+//            viewHolder.describe = (TextView) convertView.findViewById(R.id.id_item_des);
+//            viewHolder.price = (TextView) convertView.findViewById(R.id.id_item_pri);
+//            viewHolder.time = (TextView) convertView.findViewById(R.id.id_item_time);
             convertView.setTag(viewHolder);
         }
         viewHolder = (ViewHolder) convertView.getTag();

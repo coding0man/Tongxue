@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">Tongxue</string>
+
+    <string name="register_title">注  册</string>
+    <string name="register_phone">请输入手机号</string>
+    <string name="register_code">获取验证码</string>
+    <string name="register_userName">昵称</string>
+    <string name="register_passWord">密码</string>
+    <string name="register_rePassWord">确认密码</string>
 </resources>
