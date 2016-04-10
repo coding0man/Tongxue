@@ -5,34 +5,25 @@
     android:background="@color/mainBgColor"
     android:orientation="vertical">
 
-    <RelativeLayout
-        style="@style/login_title_height"
-        android:orientation="vertical">
-
-        <TextView
-            style="@style/login_title"
-            android:layout_centerInParent="true"
-            android:text="@string/register_title" />
-    </RelativeLayout>
+    <include layout="@layout/customer_title"/>
 
     <LinearLayout
-        style="@style/login_linear"
+        style="@style/rlfc_linear"
         android:gravity="center">
 
 
         <ImageView
             android:id="@+id/img_register_phone"
-            style="@style/login_imageview"
+            style="@style/rlfc_imageview"
             android:src="@mipmap/phone" />
 
         <View
-            style="@style/login_line"
+            style="@style/divider_vertical"
             />
 
         <EditText
             android:id="@+id/edt_register_phoneNum"
-            style="@style/login_edt"
-            android:background="@drawable/shape_edt"
+            style="@style/rlfc_edt"
             android:hint="请输入手机号" />
 
         <Button
@@ -48,70 +39,70 @@
     </LinearLayout>
 
     <LinearLayout
-        style="@style/login_linear">
+        style="@style/rlfc_linear">
         <ImageView
-            style="@style/login_imageview"
+            style="@style/rlfc_imageview"
             android:src="@mipmap/code_icon"/>
         <View
-            style="@style/login_line"
+            style="@style/divider_vertical"
             android:layout_toRightOf="@id/img_register_phone" />
         <EditText
             android:id="@+id/edt_register_code"
-            style="@style/login_edt"
-            android:background="@drawable/shape_edt"
+            style="@style/rlfc_edt"
             android:hint="手机验证码" />
     </LinearLayout>
 
     <LinearLayout
-        style="@style/login_linear">
+        style="@style/rlfc_linear">
         <ImageView
-            style="@style/login_imageview"
+            style="@style/rlfc_imageview"
             android:src="@mipmap/user_mame"/>
         <View
-            style="@style/login_line"
+            style="@style/divider_vertical"
             android:layout_toRightOf="@id/img_register_phone" />
         <EditText
             android:id="@+id/edt_register_userName"
-            style="@style/login_edt"
-            android:background="@drawable/shape_edt"
+            style="@style/rlfc_edt"
             android:hint="昵称" />
     </LinearLayout>
 
     <LinearLayout
-        style="@style/login_linear">
+        style="@style/rlfc_linear">
         <ImageView
-            style="@style/login_imageview"
+            style="@style/rlfc_imageview"
             android:src="@mipmap/password"/>
         <View
-            style="@style/login_line"
+            style="@style/divider_vertical"
             android:layout_toRightOf="@id/img_register_phone" />
         <EditText
             android:id="@+id/edt_register_passWord"
-            style="@style/login_edt"
-            android:background="@drawable/shape_edt"
+            style="@style/rlfc_edt"
             android:hint="密码" />
     </LinearLayout>
 
     <LinearLayout
-        style="@style/login_linear">
+        style="@style/rlfc_linear">
         <ImageView
-            style="@style/login_imageview"
+            style="@style/rlfc_imageview"
             android:src="@mipmap/password"/>
         <View
-            style="@style/login_line"
+            style="@style/divider_vertical"
             android:layout_toRightOf="@id/img_register_phone" />
         <EditText
             android:id="@+id/edt_register_rePassWord"
-            style="@style/login_edt"
-            android:background="@drawable/shape_edt"
+            style="@style/rlfc_edt"
             android:hint="确认密码" />
     </LinearLayout>
-    <View
+
+    <Button
+        android:id="@+id/btn_register_submit"
+        android:layout_marginTop="32dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:background="@drawable/btn_click_selector"
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginTop="30dp"/>
-   <Button
-       android:id="@+id/btn_register_submit"
-      style="@style/login_btn_submit"
-       android:text="提 交"/>
+        android:layout_height="48dp"
+        android:textColor="@color/white"
+        android:textSize="20dp"
+        android:text="提 交" />
 </LinearLayout>

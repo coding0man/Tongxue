@@ -7,6 +7,9 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
+
+    <!--START 主页底部按钮和文字-->
+
     <style name="main_bottom_text">
         <item name="android:textSize">14dp</item>
         <item name="android:textColor">@color/defaultTextColor</item>
@@ -19,62 +22,45 @@
         <item name="android:gravity">center_horizontal|top</item>
     </style>
 
-    <!--登陆注册标题-->
-    <style name="login_title">
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:textSize">22dp</item>
-        <item name="android:textColor">@color/white</item>
-        <item name="android:layout_gravity">center</item>
-    </style>
-    <style name="login_title_height">
-        <item name="android:layout_height">60dp</item>
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:background">@color/mainColor</item>
-    </style>
+    <!--END 主页底部按钮和文字-->
 
-    <style name="login_linear">
-        <item name="android:layout_height">56dp</item>
+
+
+    <!--START 登录 注册 忘记密码  修改密码 页面的输入框样式-->
+
+    <style name="rlfc_linear">
+        <item name="android:layout_height">48dp</item>
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_marginTop">20dp</item>
+        <item name="android:layout_marginTop">@dimen/mid_margin</item>
         <item name="android:background">@color/white</item>
         <item name="android:orientation">horizontal</item>
         <item name="android:gravity">center</item>
     </style>
 
-    <style name="login_imageview">
+    <style name="rlfc_imageview">
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_marginLeft">15dp</item>
+        <item name="android:layout_marginLeft">@dimen/mid_margin</item>
         <item name="android:layout_centerVertical">true</item>
-
     </style>
 
-    <style name="login_line">
-        <item name="android:layout_height">30dp</item>
+    <style name="divider_vertical">
+        <item name="android:layout_height">32dp</item>
         <item name="android:layout_width">2dp</item>
-        <item name="android:layout_marginLeft">15dp</item>
+        <item name="android:layout_marginLeft">@dimen/mid_margin</item>
         <item name="android:background">@color/mainBgColor</item>
         <item name="android:layout_centerVertical">true</item>
     </style>
 
-    <style name="login_edt">
+    <style name="rlfc_edt">
+        <item name="android:background">@color/transparent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_weight">1</item>
         <item name="android:textColor">@color/defaultTextColor</item>
         <item name="android:layout_marginLeft">15dp</item>
-
     </style>
 
-    <style name="login_btn_submit">
-        <item name="android:layout_height">56dp</item>
+    <!--END 登录 注册 忘记密码  修改密码 页面的输入框样式-->
 
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:background">@drawable/btn_click_selector</item>
-        <item name="android:textColor">@color/white</item>
-        <item name="android:textSize">22dp</item>
-        <item name="android:layout_margin">10dp</item>
-
-    </style>
 </resources>

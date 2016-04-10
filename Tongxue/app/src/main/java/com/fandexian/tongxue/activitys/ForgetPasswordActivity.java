@@ -1,5 +1,10 @@
 package com.fandexian.tongxue.activitys;
 
+/**
+ * Created by fandexian on 16/4/9.
+ */
+
+
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
@@ -12,7 +17,6 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,17 +26,27 @@ import com.fandexian.tongxue.Utils.MToast;
 import cn.smssdk.EventHandler;
 import cn.smssdk.SMSSDK;
 
-/**
- * Created by xia.yang on 2016/4/8.
- */
-public class RegisterActivity extends Activity implements View.OnClickListener{
+public class ForgetPasswordActivity extends Activity implements View.OnClickListener{
 
     //=======view
-    private EditText phoneNum,code,userName,passWord,rePassWord;
+    private EditText phoneNum,code,passWord,rePassWord;
     private Button btnGainCode,btnSubmit;
 
     //========variable
     private Context _this;
+    EventHandler eh=new EventHandler(){
+
+        @Override
+        public void afterEvent(int event, int result, Object data) {
+
+            Message msg = new Message();
+            msg.arg1 = event;
+            msg.arg2 = result;
+            msg.obj = data;
+            handler.sendMessage(msg);
+
+        }
+    };
 
     Handler handler=new Handler(){
         @Override
@@ -44,15 +58,15 @@ public class RegisterActivity extends Activity implements View.OnClickListener{
             if (result == SMSSDK.RESULT_COMPLETE) {//回调完成
 
                 if (event == SMSSDK.EVENT_SUBMIT_VERIFICATION_CODE) {//提交验证码成功
-                    register();//注册
+                    forget();//注册
 
                 }else if (event == SMSSDK.EVENT_GET_VERIFICATION_CODE){ //获取验证码成功
-                    Toast.makeText(RegisterActivity.this,"验证码已发送",Toast.LENGTH_LONG).show();
+                    Toast.makeText(_this,"验证码已发送",Toast.LENGTH_LONG).show();
 
                 }
             }else{
                 ((Throwable)data).printStackTrace();
-                Toast.makeText(RegisterActivity.this,"验证码输入错误",Toast.LENGTH_LONG).show();
+                Toast.makeText(_this,"验证码输入错误",Toast.LENGTH_LONG).show();
             }
         }
     };
@@ -61,7 +75,7 @@ public class RegisterActivity extends Activity implements View.OnClickListener{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-        setContentView(R.layout.activity_register);
+        setContentView(R.layout.activity_foget_password);
 
         initView();
         _this = this;
@@ -77,17 +91,17 @@ public class RegisterActivity extends Activity implements View.OnClickListener{
     private void initView() {
 
         //titleBar
-        ((TextView)findViewById(R.id.id_title_title_text)).setText("注 册");
+        ((TextView)findViewById(R.id.id_title_title_text)).setText("忘记密码");
         findViewById(R.id.id_title_right_text).setVisibility(View.GONE);
 
+
         //linear
-        phoneNum=(EditText)findViewById(R.id.edt_register_phoneNum);
-        code=(EditText)findViewById(R.id.edt_register_code);
-        userName=(EditText)findViewById(R.id.edt_register_userName);
-        passWord=(EditText)findViewById(R.id.edt_register_passWord);
-        rePassWord=(EditText)findViewById(R.id.edt_register_rePassWord);
-        btnGainCode=(Button)findViewById(R.id.btn_register_gainCode);
-        btnSubmit=(Button)findViewById(R.id.btn_register_submit);
+        phoneNum=(EditText)findViewById(R.id.edt_forget_phoneNum);
+        code=(EditText)findViewById(R.id.edt_forget_code);
+        passWord=(EditText)findViewById(R.id.edt_forget_passWord);
+        rePassWord=(EditText)findViewById(R.id.edt_forget_rePassWord);
+        btnGainCode=(Button)findViewById(R.id.btn_forget_gainCode);
+        btnSubmit=(Button)findViewById(R.id.btn_forget_submit);
 
         //setListener
         findViewById(R.id.id_title_back_img).setOnClickListener(this);
@@ -105,13 +119,13 @@ public class RegisterActivity extends Activity implements View.OnClickListener{
             case R.id.id_title_back_img:
                 finish();
                 break;
-            case R.id.btn_register_gainCode://获取验证码
+            case R.id.btn_forget_gainCode://获取验证码
                 TimeCount timeCount = new TimeCount(60 * 1000, 1000);
                 timeCount.start();
                 gainCode();
                 break;
 
-            case R.id.btn_register_submit://提交
+            case R.id.btn_forget_submit://提交
                 checkCode();
                 break;
         }
@@ -129,7 +143,7 @@ public class RegisterActivity extends Activity implements View.OnClickListener{
     /**
      * 注册提交
      */
-    private void register() {
+    private void forget() {
 
 
         if (TextUtils.isEmpty(phoneNum.getText().toString())) {
@@ -139,18 +153,15 @@ public class RegisterActivity extends Activity implements View.OnClickListener{
         if (TextUtils.isEmpty(code.getText().toString())){
             MToast.mToast(_this, "验证码不能为空");
         }
-         if (TextUtils.isEmpty(userName.getText().toString())) {
-             MToast.mToast(_this,"昵称不能为空");
-         }
-         if (TextUtils.isEmpty(passWord.getText().toString())){
-             MToast.mToast(_this,"密码不能为空");
-             return;
-          }
+        if (TextUtils.isEmpty(passWord.getText().toString())){
+            MToast.mToast(_this,"密码不能为空");
+            return;
+        }
         if (!(passWord.getText().toString()).equals((rePassWord.getText().toString()))){
             MToast.mToast(_this,"两次输入密码不一致");
-         }
+        }
 
-        MToast.mToast(_this,"下面可以进行网路请求了");
+        //MToast.mToast(_this,"下面可以进行网路请求了");
 
     }
 
@@ -163,25 +174,11 @@ public class RegisterActivity extends Activity implements View.OnClickListener{
             String phone = phoneNum.getText().toString();
             SMSSDK.getVerificationCode("86", phone);
         }else {
-            Toast.makeText(RegisterActivity.this, "电话不能为空", Toast.LENGTH_SHORT).show();
+            Toast.makeText(_this, "电话不能为空", Toast.LENGTH_SHORT).show();
 
         }
     }
 
-
-    EventHandler eh=new EventHandler(){
-
-        @Override
-        public void afterEvent(int event, int result, Object data) {
-
-            Message msg = new Message();
-            msg.arg1 = event;
-            msg.arg2 = result;
-            msg.obj = data;
-            handler.sendMessage(msg);
-
-        }
-    };
 
 
     /**
@@ -213,7 +210,7 @@ public class RegisterActivity extends Activity implements View.OnClickListener{
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        SMSSDK.unregisterEventHandler(eh);
+        SMSSDK.unregisterAllEventHandler();
     }
 
     @Override
@@ -224,3 +221,5 @@ public class RegisterActivity extends Activity implements View.OnClickListener{
         return super.onKeyDown(keyCode, event);
     }
 }
+
+

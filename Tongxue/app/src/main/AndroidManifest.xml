@@ -28,6 +28,8 @@
 
         <activity android:name=".activitys.RegisterActivity"/>
         <activity android:name=".activitys.LoginActivity"/>
+        <activity android:name=".activitys.ForgetPasswordActivity"/>
+
         <!--短信验证-->
         <!--<activity-->
             <!--android:name="com.mob.tools.MobUIShell"-->

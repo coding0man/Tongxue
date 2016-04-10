@@ -1,6 +1,7 @@
 package com.fandexian.tongxue.activitys;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -16,9 +17,15 @@ import com.fandexian.tongxue.R;
  */
 public class LoginActivity extends Activity implements View.OnClickListener{
 
-    TextView register;
-    EditText phoneNum,passWord;
-    Button login;
+    //=======view
+    private TextView register;
+    private EditText phoneNum,passWord;
+    private Button login;
+    private TextView forgetPassword;
+
+
+    //=========viriable
+    private Context _this = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,12 +36,20 @@ public class LoginActivity extends Activity implements View.OnClickListener{
     }
 
     private void initView() {
-        register= (TextView) findViewById(R.id.tv_login_register);
+        //title
+        ((TextView)findViewById(R.id.id_title_title_text)).setText("登    录");
+        findViewById(R.id.id_title_back_img).setOnClickListener(this);
+        register = ((TextView)findViewById(R.id.id_title_right_text));
+        register.setText("注 册");
+        register.setOnClickListener(this);
+
+        //linear
         phoneNum= (EditText) findViewById(R.id.edt_login_phoneNum);
         passWord= (EditText) findViewById(R.id.edt_login_passWord);
         login= (Button) findViewById(R.id.btn_login);
 
-        register.setOnClickListener(this);
+        findViewById(R.id.id_login_tv_fogetpsw).setOnClickListener(this);
+
         login.setOnClickListener(this);
 
     }
@@ -42,13 +57,18 @@ public class LoginActivity extends Activity implements View.OnClickListener{
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-
-            case R.id.tv_login_register:
+            case R.id.id_title_back_img:
+                finish();
+                break;
+            case R.id.id_title_right_text:
                 Intent intent=new Intent(LoginActivity.this,RegisterActivity.class);
                 startActivity(intent);
                 break;
             case R.id.btn_login:
                 login();
+                break;
+            case R.id.id_login_tv_fogetpsw:
+                startActivity(new Intent(_this,ForgetPasswordActivity.class));
                 break;
         }
     }
