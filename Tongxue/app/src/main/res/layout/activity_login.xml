@@ -23,6 +23,7 @@
         <EditText
             android:id="@+id/edt_login_phoneNum"
             style="@style/rlfc_edt"
+            android:text="18013116680"
             android:hint="请输入手机号" />
     </LinearLayout>
 
@@ -37,6 +38,7 @@
         <EditText
             android:id="@+id/edt_login_passWord"
             style="@style/rlfc_edt"
+            android:text="1"
             android:hint="密码" />
     </LinearLayout>
 

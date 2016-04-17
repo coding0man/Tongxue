@@ -2,22 +2,41 @@ package com.fandexian.tongxue.activitys;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.fandexian.tongxue.MainActivity;
 import com.fandexian.tongxue.R;
-import com.fandexian.tongxue.Utils.MToast;
+import com.fandexian.tongxue.Utils.Api;
+import com.fandexian.tongxue.Utils.Constants;
+import com.fandexian.tongxue.Utils.JsonHelper;
+import com.fandexian.tongxue.Utils.MyApplication;
+import com.fandexian.tongxue.Utils.ToastHelper;
+
+import org.json.JSONException;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import cn.smssdk.EventHandler;
 import cn.smssdk.SMSSDK;
@@ -28,11 +47,13 @@ import cn.smssdk.SMSSDK;
 public class RegisterActivity extends Activity implements View.OnClickListener{
 
     //=======view
-    private EditText phoneNum,code,userName,passWord,rePassWord;
+    private EditText phoneNum,code,nickName,passWord,rePassWord;
     private Button btnGainCode,btnSubmit;
 
     //========variable
     private Context _this;
+    private RequestQueue requestQueue;
+    private Map result;
 
     Handler handler=new Handler(){
         @Override
@@ -57,6 +78,43 @@ public class RegisterActivity extends Activity implements View.OnClickListener{
         }
     };
 
+    private void register() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, Api.LOGIN,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String s) {
+                        Log.e("======response", s);
+                        try {
+                            result = JsonHelper.toMap(s);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        if("1".equals(result.get("status"))){
+                            MyApplication.setIsLogin(true);
+                            startActivity(new Intent(_this, MainActivity.class));
+                            finish();
+
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError volleyError) {
+                ToastHelper.makeText(_this, "网络请求失败，请检查网络设置");
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> params = new HashMap<>();
+                params.put("userPhone",phoneNum.getText().toString());
+                params.put("nickName",nickName.getText().toString());
+                params.put("userPassword",passWord.getText().toString());
+                return params;
+            }
+        };
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(Constants.initialTimeoutMs,1,1.0f));
+        requestQueue.add(stringRequest);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,11 +122,17 @@ public class RegisterActivity extends Activity implements View.OnClickListener{
         setContentView(R.layout.activity_register);
 
         initView();
+        initVariable();
+
+
+    }
+
+    private void initVariable() {
         _this = this;
+        requestQueue = Volley.newRequestQueue(_this);
         //初始化短信验证sdk
         SMSSDK.initSDK(this, "10e49ebab1f3c", "49b99208bfc47f794ed344177e21a3a0");
         SMSSDK.registerEventHandler(eh); //注册短信回调
-
     }
 
     /**
@@ -83,7 +147,7 @@ public class RegisterActivity extends Activity implements View.OnClickListener{
         //linear
         phoneNum=(EditText)findViewById(R.id.edt_register_phoneNum);
         code=(EditText)findViewById(R.id.edt_register_code);
-        userName=(EditText)findViewById(R.id.edt_register_userName);
+        nickName=(EditText)findViewById(R.id.edt_register_userName);
         passWord=(EditText)findViewById(R.id.edt_register_passWord);
         rePassWord=(EditText)findViewById(R.id.edt_register_rePassWord);
         btnGainCode=(Button)findViewById(R.id.btn_register_gainCode);
@@ -106,13 +170,15 @@ public class RegisterActivity extends Activity implements View.OnClickListener{
                 finish();
                 break;
             case R.id.btn_register_gainCode://获取验证码
-                TimeCount timeCount = new TimeCount(60 * 1000, 1000);
-                timeCount.start();
-                gainCode();
+                if(phoneNum.getText().toString().trim().length() == 11) {
+                    TimeCount timeCount = new TimeCount(60 * 1000, 1000);
+                    timeCount.start();
+                    gainCode();
+                }
                 break;
 
             case R.id.btn_register_submit://提交
-                checkCode();
+                checkMessage();
                 break;
         }
     }
@@ -129,28 +195,31 @@ public class RegisterActivity extends Activity implements View.OnClickListener{
     /**
      * 注册提交
      */
-    private void register() {
+    private void checkMessage() {
 
 
         if (TextUtils.isEmpty(phoneNum.getText().toString())) {
-            MToast.mToast(_this,"手机号不能为空");
+            ToastHelper.makeText(_this, "手机号不能为空");
             return;
         }
         if (TextUtils.isEmpty(code.getText().toString())){
-            MToast.mToast(_this, "验证码不能为空");
+            ToastHelper.makeText(_this, "验证码不能为空");
+            return;
         }
-         if (TextUtils.isEmpty(userName.getText().toString())) {
-             MToast.mToast(_this,"昵称不能为空");
+         if (TextUtils.isEmpty(nickName.getText().toString())) {
+             ToastHelper.makeText(_this, "昵称不能为空");
+             return;
          }
          if (TextUtils.isEmpty(passWord.getText().toString())){
-             MToast.mToast(_this,"密码不能为空");
+             ToastHelper.makeText(_this, "密码不能为空");
              return;
           }
         if (!(passWord.getText().toString()).equals((rePassWord.getText().toString()))){
-            MToast.mToast(_this,"两次输入密码不一致");
+            ToastHelper.makeText(_this, "两次输入密码不一致");
+            return;
          }
 
-        MToast.mToast(_this,"下面可以进行网路请求了");
+        checkCode();
 
     }
 

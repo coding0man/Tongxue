@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/mainBgColor"
+    tools:context="com.fandexian.tongxue.UserDetail">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:id="@+id/id_detail_title"
+        android:alpha="30">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:id="@+id/id_detail_bg_img"
+            android:alpha="30"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/mainColor"
+            android:alpha="0.3"/>
+        <ImageView
+            android:id="@+id/id_detail_back_img"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="@dimen/min_margin"
+            android:layout_width="20dp"
+            android:layout_height="25dp"
+            android:src="@mipmap/left_arrow"/>
+        <TextView
+            android:id="@+id/id_title_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_centerHorizontal="true"
+            android:textColor="@android:color/white"
+            android:textSize="18dp"
+            android:text="个人详情"/>
+        <TextView
+            android:id="@+id/id_detail_tv_edit_save"
+            android:layout_alignParentRight="true"
+            android:paddingTop="@dimen/min_margin"
+            android:paddingRight="@dimen/min_margin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:textSize="18dp"
+            android:text="修改"/>
+        <de.hdodenhof.circleimageview.CircleImageView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/id_detail_img_head"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginTop="16dp"
+            android:layout_centerInParent="true"
+            android:src="@mipmap/xiaocao"
+            app:civ_border_width="1dp"
+            app:civ_border_color="#FFFFFFFF"/>
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/id_detail_img_head"
+            android:layout_toEndOf="@+id/id_detail_img_head">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/ic_launcher" />
+
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:id="@+id/id_detail_ll_tv"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+                <LinearLayout
+                    style="@style/user_detail_linear">
+                    <TextView
+                        style="@style/user_detail_linear_left_text"
+                        android:text="昵称"/>
+                    <TextView
+                        android:id="@+id/id_detail_tv_nick"
+                        style="@style/user_detail_linear_right_text"
+                        android:text="唯独蔚蓝"/>
+
+                </LinearLayout>
+                <LinearLayout
+                    style="@style/user_detail_linear">
+                    <TextView
+                        style="@style/user_detail_linear_left_text"
+                        android:text="性别"/>
+                    <TextView
+                        android:id="@+id/id_detail_tv_sex"
+                        style="@style/user_detail_linear_right_text"
+                        android:text="女"/>
+
+                </LinearLayout>
+                <LinearLayout
+                    style="@style/user_detail_linear">
+                    <TextView
+                        style="@style/user_detail_linear_left_text"
+                        android:text="QQ"/>
+                    <TextView
+                        android:id="@+id/id_detail_tv_qq"
+                        style="@style/user_detail_linear_right_text"
+                        android:text="645534173"/>
+
+                </LinearLayout>
+                <LinearLayout
+                    style="@style/user_detail_linear">
+                    <TextView
+                        style="@style/user_detail_linear_left_text"
+                        android:text="微信"/>
+                    <TextView
+                        android:id="@+id/id_detail_tv_wechat"
+                        style="@style/user_detail_linear_right_text"
+                        android:text="love1999"/>
+
+                </LinearLayout>
+                <LinearLayout
+                    style="@style/user_detail_linear">
+                    <TextView
+                        style="@style/user_detail_linear_left_text"
+                        android:text="学院"/>
+                    <TextView
+                        android:id="@+id/id_detail_tv_department"
+                        style="@style/user_detail_linear_right_text"
+                        android:text="计算机科学与技术"/>
+
+                </LinearLayout>
+                <LinearLayout
+                    style="@style/user_detail_linear">
+                    <TextView
+                        style="@style/user_detail_linear_left_text"
+                        android:text="学号"/>
+                    <TextView
+                        android:id="@+id/id_detail_tv_stunumber"
+                        style="@style/user_detail_linear_right_text"
+                        android:text="1227401132"/>
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/id_detail_ll_et"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:visibility="gone">
+                <LinearLayout
+                    android:id="@+id/id_detail_ll_nick"
+                    style="@style/user_detail_linear">
+                    <TextView
+                        style="@style/user_detail_linear_left_text"
+                        android:text="昵称"/>
+                    <EditText
+                        android:id="@+id/id_detail_et_nick"
+                        style="@style/user_detail_linear_right_text"
+                        android:text="唯独蔚蓝"/>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/id_detail_ll_sex"
+                    style="@style/user_detail_linear">
+                    <TextView
+                        style="@style/user_detail_linear_left_text"
+                        android:text="性别"/>
+                    <RadioGroup
+                        android:id="@+id/id_detail_rg_sex"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:paddingLeft="220dp"
+                        android:orientation="horizontal">
+                        <RadioButton
+                            android:id="@+id/id_detail_rb_male"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:checked="true"
+                            android:text="男"/>
+                        <RadioButton
+                            android:id="@+id/id_detail_rb_female"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="女"/>
+                    </RadioGroup>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/id_detail_ll_qq"
+                    style="@style/user_detail_linear">
+                    <TextView
+                        style="@style/user_detail_linear_left_text"
+                        android:text="QQ"/>
+                    <EditText
+                        android:id="@+id/id_detail_et_qq"
+                        style="@style/user_detail_linear_right_text"
+                        android:text="645534173"/>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/id_detail_ll_wechat"
+                    style="@style/user_detail_linear">
+                    <TextView
+                        style="@style/user_detail_linear_left_text"
+                        android:text="微信"/>
+                    <EditText
+                        android:id="@+id/id_detail_et_wechat"
+                        style="@style/user_detail_linear_right_text"
+                        android:text="love1999"/>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/id_detail_ll_department"
+                    style="@style/user_detail_linear">
+                    <TextView
+                        style="@style/user_detail_linear_left_text"
+                        android:text="学院"/>
+                    <EditText
+                        android:id="@+id/id_detail_et_department"
+                        style="@style/user_detail_linear_right_text"
+                        android:text="计算机科学与技术"/>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/id_detail_ll_stunumber"
+                    style="@style/user_detail_linear">
+                    <TextView
+                        style="@style/user_detail_linear_left_text"
+                        android:text="学号"/>
+                    <EditText
+                        android:id="@+id/id_detail_et_stunumber"
+                        style="@style/user_detail_linear_right_text"
+                        android:text="1227401132"/>
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+        </RelativeLayout>
+
+    </ScrollView>
+
+
+
+
+
+</LinearLayout>

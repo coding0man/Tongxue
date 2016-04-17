@@ -10,8 +10,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
+import com.fandexian.tongxue.MyColects;
+import com.fandexian.tongxue.MyReleasedGoods;
 import com.fandexian.tongxue.R;
+import com.fandexian.tongxue.Setting;
+import com.fandexian.tongxue.UserDetail;
+import com.fandexian.tongxue.Utils.MyApplication;
 import com.fandexian.tongxue.activitys.LoginActivity;
 import com.fandexian.tongxue.activitys.RegisterActivity;
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
@@ -35,15 +41,29 @@ import de.hdodenhof.circleimageview.CircleImageView;
 /**
  * Created by dexian.fan on 2016/3/17.
  */
-public class UserCenter extends Fragment {
+public class UserCenter extends Fragment implements View.OnClickListener{
     String url;
-    CircleImageView centerHead;
-    @Nullable
+    //=======view
+    private CircleImageView centerHead;
+    private LinearLayout released,collects,personalInfo,setting;
+
+    //=======variable
+    private Context _this;
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        initImageLoader((Context)getActivity());
+
+        initImageLoader((Context) getActivity());
 
         View view = inflater.inflate(R.layout.fragment_user_center, container, false);
+
+        initView(view);
+        initVariable();
+
+
+
+
         int height = ((ImageView)view.findViewById(R.id.id_center_bg_img)).getMeasuredHeight();
         Log.e("=======",height+"");
         DisplayImageOptions options = new DisplayImageOptions.Builder()
@@ -55,22 +75,33 @@ public class UserCenter extends Fragment {
             url ="http://image.baidu.com/search/down?tn=download&ipn=dwnl&word=download&ie=utf8&fr=result&url=http%3A%2F%2Fimg02.tooopen.com%2Fimages%2F20150524%2Ftooopen_sy_125970524468.jpg&thumburl=http%3A%2F%2Fimg2.imgtn.bdimg.com%2Fit%2Fu%3D1880114067%2C757853807%26fm%3D21%26gp%3D0.jpg";
 
 
-        ImageLoader.getInstance().displayImage(url,(ImageView)view.findViewById(R.id.id_center_bg_img),options);
+        ImageLoader.getInstance().displayImage(url, (ImageView) view.findViewById(R.id.id_center_bg_img), options);
 
-       centerHead= (CircleImageView) view.findViewById(R.id.id_center_head);
-
-        centerHead.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent=new Intent(getActivity(), LoginActivity.class);
-                startActivity(intent);
-            }
-        });
 
         //ImageLoader.getInstance().displayImage(url,(ImageView)view.findViewById(R.id.id_center_head),options);
         return view;
 
     }
+
+    private void initVariable() {
+        _this = getActivity();
+    }
+
+    private void initView(View view) {
+        centerHead= (CircleImageView) view.findViewById(R.id.id_center_img_head);
+        centerHead.setOnClickListener(this);
+
+        released = (LinearLayout) view.findViewById(R.id.id_center_ll_released);
+        collects = (LinearLayout) view.findViewById(R.id.id_center_ll_collect);
+        personalInfo = (LinearLayout) view.findViewById(R.id.id_center_ll_personal_info);
+        setting = (LinearLayout) view.findViewById(R.id.id_center_ll_setting);
+
+        released.setOnClickListener(this);
+        collects.setOnClickListener(this);
+        personalInfo.setOnClickListener(this);
+        setting.setOnClickListener(this);
+    }
+
     public static void initImageLoader(Context context) {
         //缓存文件的目录
         File cacheDir = StorageUtils.getOwnCacheDirectory(context, "universalimageloader/Cache");
@@ -90,6 +121,47 @@ public class UserCenter extends Fragment {
                 .build();
         //全局初始化此配置
         ImageLoader.getInstance().init(config);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.id_center_img_head:
+                if(!MyApplication.getIsLogin()){
+                    startActivity(new Intent(_this,LoginActivity.class));
+                }else{
+                    startActivity(new Intent(_this,UserDetail.class));
+                }
+                break;
+            case R.id.id_center_ll_released:
+                if(!MyApplication.getIsLogin()){
+                    startActivity(new Intent(_this,LoginActivity.class));
+                }else{
+                    startActivity(new Intent(_this,MyReleasedGoods.class));
+                }
+                break;
+            case R.id.id_center_ll_collect:
+                if(!MyApplication.getIsLogin()){
+                    startActivity(new Intent(_this,LoginActivity.class));
+                }else{
+                    startActivity(new Intent(_this,MyColects.class));
+                }
+                break;
+            case R.id.id_center_ll_personal_info:
+                if(!MyApplication.getIsLogin()){
+                    startActivity(new Intent(_this,LoginActivity.class));
+                }else{
+                    startActivity(new Intent(_this,UserDetail.class));
+                }
+                break;
+            case R.id.id_center_ll_setting:
+                if(!MyApplication.getIsLogin()){
+                    startActivity(new Intent(_this,LoginActivity.class));
+                }else{
+                    startActivity(new Intent(_this,Setting.class));
+                }
+                break;
+        }
     }
 }
 

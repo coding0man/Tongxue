@@ -12,6 +12,7 @@ import android.os.CountDownTimer;
 import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
@@ -20,13 +21,29 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.fandexian.tongxue.R;
-import com.fandexian.tongxue.Utils.MToast;
+import com.fandexian.tongxue.Utils.Api;
+import com.fandexian.tongxue.Utils.Constants;
+import com.fandexian.tongxue.Utils.JsonHelper;
+import com.fandexian.tongxue.Utils.ToastHelper;
+
+import org.json.JSONException;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import cn.smssdk.EventHandler;
 import cn.smssdk.SMSSDK;
 
-public class ForgetPasswordActivity extends Activity implements View.OnClickListener{
+public class ResetPasswordActivity extends Activity implements View.OnClickListener{
 
     //=======view
     private EditText phoneNum,code,passWord,rePassWord;
@@ -34,6 +51,8 @@ public class ForgetPasswordActivity extends Activity implements View.OnClickList
 
     //========variable
     private Context _this;
+    private RequestQueue requestQueue;
+    private Map result;
     EventHandler eh=new EventHandler(){
 
         @Override
@@ -58,7 +77,7 @@ public class ForgetPasswordActivity extends Activity implements View.OnClickList
             if (result == SMSSDK.RESULT_COMPLETE) {//回调完成
 
                 if (event == SMSSDK.EVENT_SUBMIT_VERIFICATION_CODE) {//提交验证码成功
-                    forget();//注册
+                    resetPassword();//注册
 
                 }else if (event == SMSSDK.EVENT_GET_VERIFICATION_CODE){ //获取验证码成功
                     Toast.makeText(_this,"验证码已发送",Toast.LENGTH_LONG).show();
@@ -71,18 +90,58 @@ public class ForgetPasswordActivity extends Activity implements View.OnClickList
         }
     };
 
+    private void resetPassword() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, Api.LOGIN,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String s) {
+                        Log.e("======response", s);
+                        try {
+                             result = JsonHelper.toMap(s);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        if("1".equals(result.get("status"))){
+                            ToastHelper.makeText(_this,"重置密码成功");
+
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError volleyError) {
+                ToastHelper.makeText(_this, "网络请求失败，请检查网络");
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> params = new HashMap<>();
+                params.put("userPhone",phoneNum.getText().toString());
+                params.put("userPassword",passWord.getText().toString());
+                return params;
+            }
+        };
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(Constants.initialTimeoutMs,1,1.0f));
+        requestQueue.add(stringRequest);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-        setContentView(R.layout.activity_foget_password);
+        setContentView(R.layout.activity_reset_password);
 
         initView();
-        _this = this;
+        initVariable();
         //初始化短信验证sdk
         SMSSDK.initSDK(this, "10e49ebab1f3c", "49b99208bfc47f794ed344177e21a3a0");
         SMSSDK.registerEventHandler(eh); //注册短信回调
 
+    }
+
+    private void initVariable() {
+
+        _this = this;
+        requestQueue = Volley.newRequestQueue(_this);
     }
 
     /**
@@ -120,49 +179,49 @@ public class ForgetPasswordActivity extends Activity implements View.OnClickList
                 finish();
                 break;
             case R.id.btn_forget_gainCode://获取验证码
-                TimeCount timeCount = new TimeCount(60 * 1000, 1000);
-                timeCount.start();
-                gainCode();
+                if (phoneNum.getText().toString().trim().length() == 11) {
+                    TimeCount timeCount = new TimeCount(60 * 1000, 1000);
+                    timeCount.start();
+                    gainCode();
+                }else{
+                    ToastHelper.makeText(_this,"请输入正确的手机号");
+                }
                 break;
 
             case R.id.btn_forget_submit://提交
-                checkCode();
+                checkMessage();
                 break;
         }
     }
 
-    /**
-     * 验证验证码是否正确
-     */
-    private void checkCode() {
-
-        SMSSDK.submitVerificationCode("86", phoneNum.getText().toString(), code.getText().toString());
-
-    }
 
     /**
      * 注册提交
      */
-    private void forget() {
+    private void checkMessage() {
 
 
         if (TextUtils.isEmpty(phoneNum.getText().toString())) {
-            MToast.mToast(_this,"手机号不能为空");
+            ToastHelper.makeText(_this, "手机号不能为空");
             return;
         }
         if (TextUtils.isEmpty(code.getText().toString())){
-            MToast.mToast(_this, "验证码不能为空");
+            ToastHelper.makeText(_this, "验证码不能为空");
+            return;
         }
         if (TextUtils.isEmpty(passWord.getText().toString())){
-            MToast.mToast(_this,"密码不能为空");
+            ToastHelper.makeText(_this, "密码不能为空");
             return;
         }
         if (!(passWord.getText().toString()).equals((rePassWord.getText().toString()))){
-            MToast.mToast(_this,"两次输入密码不一致");
+            ToastHelper.makeText(_this, "两次输入密码不一致");
+            return;
         }
 
-        //MToast.mToast(_this,"下面可以进行网路请求了");
-
+        /**
+         * 验证验证码是否正确
+         */
+        SMSSDK.submitVerificationCode("86", phoneNum.getText().toString(), code.getText().toString());
     }
 
     /**

@@ -12,13 +12,12 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="160dp"
-            android:id="@+id/id_center_bg_img"
-            android:alpha="30"/>
+            android:id="@+id/id_center_bg_img"/>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/mainColor"
-            android:alpha="0.3"/>
+            android:alpha="0.2"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -30,19 +29,19 @@
             android:text="个人中心"/>
         <de.hdodenhof.circleimageview.CircleImageView
             xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/id_center_head"
+            android:id="@+id/id_center_img_head"
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:layout_marginTop="16dp"
             android:layout_centerInParent="true"
-            android:src="@mipmap/ic_launcher"
+            android:src="@mipmap/xiaocao"
             app:civ_border_width="1dp"
             app:civ_border_color="#FFFFFFFF"/>
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/id_center_head"
-            android:layout_toEndOf="@+id/id_center_head">
+            android:layout_below="@+id/id_center_img_head"
+            android:layout_toEndOf="@+id/id_center_img_head">
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -54,16 +53,16 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="100dp"
+        android:layout_marginTop="32dp"
         android:paddingTop="4dp"
         android:layout_below="@+id/id_center_title"
-        android:layout_marginTop="24dp"
         android:id="@+id/id_ll"
         android:background="@color/white">
         <LinearLayout
+            android:id="@+id/id_center_ll_released"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:id="@+id/id_ll_fabu"
             android:layout_weight="1"
             android:weightSum="2">
             <ImageView
@@ -81,10 +80,10 @@
                 style="@style/center_text"/>
         </LinearLayout>
         <LinearLayout
+            android:id="@+id/id_center_ll_collect"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:id="@+id/id_ll_shoucang"
             android:layout_weight="1">
             <ImageView
                 android:layout_width="40dp"
@@ -101,10 +100,10 @@
                 style="@style/center_text"/>
         </LinearLayout>
         <LinearLayout
+            android:id="@+id/id_center_ll_personal_info"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:id="@+id/id_ll_xinxi"
             android:layout_weight="1">
             <ImageView
                 android:layout_width="40dp"
@@ -121,10 +120,10 @@
                 style="@style/center_text"/>
         </LinearLayout>
         <LinearLayout
+            android:id="@+id/id_center_ll_setting"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:id="@+id/id_ll_shezhi"
             android:layout_weight="1">
             <ImageView
                 android:layout_width="40dp"
