@@ -18,6 +18,7 @@ import com.fandexian.tongxue.R;
 import com.fandexian.tongxue.Setting;
 import com.fandexian.tongxue.UserDetail;
 import com.fandexian.tongxue.Utils.MyApplication;
+import com.fandexian.tongxue.Utils.PreferenceHelper;
 import com.fandexian.tongxue.activitys.LoginActivity;
 import com.fandexian.tongxue.activitys.RegisterActivity;
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
@@ -127,35 +128,35 @@ public class UserCenter extends Fragment implements View.OnClickListener{
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.id_center_img_head:
-                if(!MyApplication.getIsLogin()){
+                if(!PreferenceHelper.from(_this).getBoolean(PreferenceHelper.isLogin)){
                     startActivity(new Intent(_this,LoginActivity.class));
                 }else{
                     startActivity(new Intent(_this,UserDetail.class));
                 }
                 break;
             case R.id.id_center_ll_released:
-                if(!MyApplication.getIsLogin()){
+                if(!PreferenceHelper.from(_this).getBoolean(PreferenceHelper.isLogin)){
                     startActivity(new Intent(_this,LoginActivity.class));
                 }else{
                     startActivity(new Intent(_this,MyReleasedGoods.class));
                 }
                 break;
             case R.id.id_center_ll_collect:
-                if(!MyApplication.getIsLogin()){
+                if(!PreferenceHelper.from(_this).getBoolean(PreferenceHelper.isLogin)){
                     startActivity(new Intent(_this,LoginActivity.class));
                 }else{
                     startActivity(new Intent(_this,MyColects.class));
                 }
                 break;
             case R.id.id_center_ll_personal_info:
-                if(!MyApplication.getIsLogin()){
+                if(!PreferenceHelper.from(_this).getBoolean(PreferenceHelper.isLogin)){
                     startActivity(new Intent(_this,LoginActivity.class));
                 }else{
                     startActivity(new Intent(_this,UserDetail.class));
                 }
                 break;
             case R.id.id_center_ll_setting:
-                if(!MyApplication.getIsLogin()){
+                if(!PreferenceHelper.from(_this).getBoolean(PreferenceHelper.isLogin)){
                     startActivity(new Intent(_this,LoginActivity.class));
                 }else{
                     startActivity(new Intent(_this,Setting.class));

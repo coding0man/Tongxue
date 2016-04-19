@@ -24,7 +24,7 @@ import com.fandexian.tongxue.R;
 import com.fandexian.tongxue.Utils.Api;
 import com.fandexian.tongxue.Utils.Constants;
 import com.fandexian.tongxue.Utils.JsonHelper;
-import com.fandexian.tongxue.Utils.MyApplication;
+import com.fandexian.tongxue.Utils.PreferenceHelper;
 import com.fandexian.tongxue.Utils.ToastHelper;
 
 import org.json.JSONException;
@@ -124,8 +124,8 @@ public class LoginActivity extends Activity implements View.OnClickListener{
                         if("1".equals(result.get("status"))){
                             startActivity(new Intent(_this, MainActivity.class));
 
-                            MyApplication.setIsLogin(true);
-                            MyApplication.setUserPhone(phoneNum.getText().toString());
+                            PreferenceHelper.from(_this).saveBoolean(PreferenceHelper.isLogin, true);
+                            PreferenceHelper.from(_this).saveString(PreferenceHelper.userPhone,phoneNum.getText().toString());
 
                         }
                     }

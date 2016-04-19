@@ -2,9 +2,6 @@ package com.fandexian.tongxue;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -29,10 +26,7 @@ import com.fandexian.tongxue.Utils.Api;
 import com.fandexian.tongxue.Utils.Constants;
 import com.fandexian.tongxue.Utils.JsonHelper;
 import com.fandexian.tongxue.Utils.MyApplication;
-import com.fandexian.tongxue.Utils.Resp;
-import com.fandexian.tongxue.Utils.SharedPreferenceHelper;
 import com.fandexian.tongxue.Utils.ToastHelper;
-import com.google.gson.Gson;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -74,6 +68,7 @@ public class UserDetail extends Activity implements View.OnClickListener{
 
 
     private void initView() {
+        //=====标题栏
         findViewById(R.id.id_detail_back_img).setOnClickListener(this);
         head = (CircleImageView) findViewById(R.id.id_detail_img_head);
         edit_save = (TextView) findViewById(R.id.id_detail_tv_edit_save);
