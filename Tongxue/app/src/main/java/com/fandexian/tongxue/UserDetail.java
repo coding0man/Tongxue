@@ -26,6 +26,7 @@ import com.fandexian.tongxue.Utils.Api;
 import com.fandexian.tongxue.Utils.Constants;
 import com.fandexian.tongxue.Utils.JsonHelper;
 import com.fandexian.tongxue.Utils.MyApplication;
+import com.fandexian.tongxue.Utils.PreferenceHelper;
 import com.fandexian.tongxue.Utils.ToastHelper;
 
 import org.json.JSONException;
@@ -119,7 +120,7 @@ public class UserDetail extends Activity implements View.OnClickListener{
 
 
     private void getUserInfo() {
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, Api.GET_USER_INFO,
+        StringRequest getInfoRequest = new StringRequest(Request.Method.POST, Api.GET_USER_INFO,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String s) {
@@ -149,21 +150,25 @@ public class UserDetail extends Activity implements View.OnClickListener{
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String,String> params = new HashMap<>();
-                params.put("userPhone", MyApplication.getUserPhone());
+                params.put("userPhone", PreferenceHelper.from(_this).getString(PreferenceHelper.userPhone));
                 return params;
             }
         };
-        stringRequest.setRetryPolicy(new DefaultRetryPolicy(Constants.initialTimeoutMs, 1, 1.0f));
-        requestQueue.add(stringRequest);
+        getInfoRequest.setRetryPolicy(new DefaultRetryPolicy(Constants.initialTimeoutMs, 1, 1.0f));
+        requestQueue.add(getInfoRequest);
     }
 
     private void getTexts() {
-        userInfo.setNickName(et_nick.getText().toString().trim());
-        //userInfo.setUserSex(et_nick.getText().toString().trim());
-        userInfo.setUserQq(et_qq.getText().toString().trim());
-        userInfo.setUserWechat(et_wechat.getText().toString().trim());
-        userInfo.setUserDepartment(et_department.getText().toString().trim());
-        userInfo.setStuNumber(et_stuNumber.getText().toString().trim());
+        editing_userInfo.setNickName(et_nick.getText().toString().trim());
+        if(rg_sex.getCheckedRadioButtonId() == R.id.id_detail_rb_male) {
+            userInfo.setUserSex("男");
+        }else{
+            userInfo.setUserSex("女");
+        }
+        editing_userInfo.setUserQq(et_qq.getText().toString().trim());
+        editing_userInfo.setUserWechat(et_wechat.getText().toString().trim());
+        editing_userInfo.setUserDepartment(et_department.getText().toString().trim());
+        editing_userInfo.setStuNumber(et_stuNumber.getText().toString().trim());
 
     }
     private void setTexts() {
@@ -175,40 +180,41 @@ public class UserDetail extends Activity implements View.OnClickListener{
         tv_department.setText(userInfo.getUserDepartment());
         tv_stuNumber.setText(userInfo.getStuNumber());
 
-//        //将数据存入et
-//        et_nick.setText(userInfo.getNickName());
-//        if("男".equals(userInfo.getUserSex())){
-//            findViewById(R.id.id_detail_rb_male).setSelected(true);
-//        }else if("女".equals(userInfo.getUserSex())){
-//            findViewById(R.id.id_detail_rb_female).setSelected(true);
-//        }
-//        et_qq.setText(userInfo.getUserQq());
-//        et_wechat.setText(userInfo.getUserWechat());
-//        et_department.setText(userInfo.getUserDepartment());
-//        et_stuNumber.setText(userInfo.getStuNumber());
+        //将数据存入et
+        et_nick.setText(userInfo.getNickName());
+        if("男".equals(userInfo.getUserSex())){
+            findViewById(R.id.id_detail_rb_male).setSelected(true);
+        }else if("女".equals(userInfo.getUserSex())){
+            findViewById(R.id.id_detail_rb_female).setSelected(true);
+        }
+        et_qq.setText(userInfo.getUserQq());
+        et_wechat.setText(userInfo.getUserWechat());
+        et_department.setText(userInfo.getUserDepartment());
+        et_stuNumber.setText(userInfo.getStuNumber());
 
 
-        //将输入存入application中
-        setToApplication();
+        //将输入存入preference中
+        set2Preference();
+        PreferenceHelper.from(_this).saveInt(PreferenceHelper.userId,userInfo.getUserId());
     }
 
-    private void setToApplication() {
+    private void set2Preference() {
 
 
-        MyApplication.setUserPhone(userInfo.getNickName());
-        MyApplication.setNickName(userInfo.getNickName());
-        MyApplication.setUserSex(userInfo.getNickName());
-        MyApplication.setUserHead(userInfo.getUserHead());
-        MyApplication.setUserQq(userInfo.getNickName());
-        MyApplication.setUserWechat(userInfo.getNickName());
-        MyApplication.setIsCertified(userInfo.getIsCertified());
-        MyApplication.setUserDepartment(userInfo.getNickName());
-        MyApplication.setStuNumber(userInfo.getNickName());
+//        MyApplication.setUserPhone(userInfo.getNickName());
+//        MyApplication.setNickName(userInfo.getNickName());
+//        MyApplication.setUserSex(userInfo.getNickName());
+//        MyApplication.setUserHead(userInfo.getUserHead());
+//        MyApplication.setUserQq(userInfo.getNickName());
+//        MyApplication.setUserWechat(userInfo.getNickName());
+//        MyApplication.setIsCertified(userInfo.getIsCertified());
+//        MyApplication.setUserDepartment(userInfo.getNickName());
+//        MyApplication.setStuNumber(userInfo.getNickName());
     }
 
     private void editUserInfo() {
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, Api.EDIT_USER_INFO,
+        StringRequest editInfoRequest = new StringRequest(Request.Method.POST, Api.EDIT_USER_INFO,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String s) {
@@ -218,6 +224,9 @@ public class UserDetail extends Activity implements View.OnClickListener{
                             map = JsonHelper.toMap(s);
                             if("1".equals(map.get("status"))){
                                 ToastHelper.makeText(_this,"修改信息成功");
+
+                                JsonHelper.toJavaBean(userInfo,JsonHelper.toMap(editing_userInfo));
+                                setTexts();
 
                             }
                         }catch (JSONException e) {
@@ -236,8 +245,8 @@ public class UserDetail extends Activity implements View.OnClickListener{
                 return JsonHelper.toMap(editing_userInfo);
             }
         };
-        stringRequest.setRetryPolicy(new DefaultRetryPolicy(Constants.initialTimeoutMs,1,1.0f));
-        requestQueue.add(stringRequest);
+        editInfoRequest.setRetryPolicy(new DefaultRetryPolicy(Constants.initialTimeoutMs,1,1.0f));
+        requestQueue.add(editInfoRequest);
     }
 
     @Override

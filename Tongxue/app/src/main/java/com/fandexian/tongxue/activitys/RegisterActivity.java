@@ -91,7 +91,8 @@ public class RegisterActivity extends Activity implements View.OnClickListener{
                         }
                         if("1".equals(result.get("status"))){
                             MyApplication.setIsLogin(true);
-                            startActivity(new Intent(_this, MainActivity.class));
+                            ToastHelper.makeText(_this,"注册成功");
+                            //startActivity(new Intent(_this, LoginActivity.class));
                             finish();
 
                         }

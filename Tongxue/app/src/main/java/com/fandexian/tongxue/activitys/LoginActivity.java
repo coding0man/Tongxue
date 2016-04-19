@@ -88,13 +88,13 @@ public class LoginActivity extends Activity implements View.OnClickListener{
                 break;
             case R.id.id_title_right_text:
                 Intent intent=new Intent(LoginActivity.this,RegisterActivity.class);
-                startActivity(intent);
+                startActivityForResult(intent, 1);
                 break;
             case R.id.btn_login:
                 login();
                 break;
             case R.id.id_login_tv_fogetpsw:
-                startActivity(new Intent(_this,ResetPasswordActivity.class));
+                startActivityForResult(new Intent(_this, ResetPasswordActivity.class), 2);
                 break;
         }
     }
@@ -122,7 +122,8 @@ public class LoginActivity extends Activity implements View.OnClickListener{
                             e.printStackTrace();
                         }
                         if("1".equals(result.get("status"))){
-                            startActivity(new Intent(_this, MainActivity.class));
+//                            startActivity(new Intent(_this, MainActivity.class));
+                            finish();
 
                             PreferenceHelper.from(_this).saveBoolean(PreferenceHelper.isLogin, true);
                             PreferenceHelper.from(_this).saveString(PreferenceHelper.userPhone,phoneNum.getText().toString());
@@ -148,7 +149,18 @@ public class LoginActivity extends Activity implements View.OnClickListener{
 
     }
 
-
-
-
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch(requestCode){
+            case 1:
+                if(resultCode == 1){
+                    finish();
+                }
+            case 2:
+                if(resultCode == 1){
+                    finish();
+                }
+        }
+    }
 }

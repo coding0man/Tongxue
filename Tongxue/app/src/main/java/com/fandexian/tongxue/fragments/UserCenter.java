@@ -129,39 +129,47 @@ public class UserCenter extends Fragment implements View.OnClickListener{
         switch (v.getId()){
             case R.id.id_center_img_head:
                 if(!PreferenceHelper.from(_this).getBoolean(PreferenceHelper.isLogin)){
-                    startActivity(new Intent(_this,LoginActivity.class));
+                    startActivityForResult(new Intent(_this, LoginActivity.class), 1);
                 }else{
                     startActivity(new Intent(_this,UserDetail.class));
                 }
                 break;
             case R.id.id_center_ll_released:
                 if(!PreferenceHelper.from(_this).getBoolean(PreferenceHelper.isLogin)){
-                    startActivity(new Intent(_this,LoginActivity.class));
+                    startActivityForResult(new Intent(_this, LoginActivity.class), 1);
                 }else{
                     startActivity(new Intent(_this,MyReleasedGoods.class));
                 }
                 break;
             case R.id.id_center_ll_collect:
                 if(!PreferenceHelper.from(_this).getBoolean(PreferenceHelper.isLogin)){
-                    startActivity(new Intent(_this,LoginActivity.class));
+                    startActivityForResult(new Intent(_this, LoginActivity.class), 1);
                 }else{
                     startActivity(new Intent(_this,MyColects.class));
                 }
                 break;
             case R.id.id_center_ll_personal_info:
                 if(!PreferenceHelper.from(_this).getBoolean(PreferenceHelper.isLogin)){
-                    startActivity(new Intent(_this,LoginActivity.class));
+                    startActivityForResult(new Intent(_this, LoginActivity.class), 1);
                 }else{
                     startActivity(new Intent(_this,UserDetail.class));
                 }
                 break;
             case R.id.id_center_ll_setting:
                 if(!PreferenceHelper.from(_this).getBoolean(PreferenceHelper.isLogin)){
-                    startActivity(new Intent(_this,LoginActivity.class));
+                    startActivityForResult(new Intent(_this,LoginActivity.class),1);
                 }else{
                     startActivity(new Intent(_this,Setting.class));
                 }
                 break;
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode == 1){
+
         }
     }
 }
