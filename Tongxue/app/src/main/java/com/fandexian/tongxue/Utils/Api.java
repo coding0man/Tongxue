@@ -4,7 +4,7 @@ package com.fandexian.tongxue.Utils;
  * Created by fandexian on 16/4/16.
  */
 public class Api {
-    public static final String BASE_API = "http://192.168.1.123:8080/";
+    public static final String BASE_API = "http://192.168.1.107:8080/";
 
     public static final String IS_REGISTERED = BASE_API+"api/isRegistered";     //<!--判断是否注册-->
     public static final String REGISTER = BASE_API+"api/register";              //用户注册

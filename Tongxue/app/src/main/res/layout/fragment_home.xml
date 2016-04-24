@@ -6,43 +6,51 @@
         android:id="@+id/id_home_title"
         layout="@layout/customer_title"/>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="24dp"
-        android:id="@+id/id_home_choose"
+    <View
+        android:id="@+id/id_home_divider1"
         android:layout_below="@+id/id_home_title"
-        android:background="#c1bcbc"
+        android:layout_marginTop="4dp"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/dividerColor"/>
+    <LinearLayout
+        android:id="@+id/id_home_choose"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_below="@+id/id_home_divider1"
+        android:background="@color/white"
         android:orientation="horizontal">
-        <TextView
+        <Button
+            android:id="@+id/id_home_choose_campus"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/id_main_fenlei1"
             android:layout_marginStart="16dp"
             android:layout_gravity="center_vertical"
-            android:text="数码"/>
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/icon_xiaoqu"/>
-        <TextView
+            android:text="校区"
+            android:drawableRight="@mipmap/icon_xiaoqu"/>
+
+        <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/id_main_fenlei2"
             android:layout_marginStart="16dp"
             android:layout_gravity="center_vertical"
-            android:text="手机"/>
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/icon_xiaoqu"/>
+            android:text="品类"
+            android:drawableRight="@mipmap/icon_xiaoqu"/>
     </LinearLayout>
+    <View
+        android:id="@+id/id_home_divider2"
+        android:layout_below="@+id/id_home_choose"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/dividerColor"/>
 
-    <ListView
+    <com.fandexian.tongxue.MyView.XListView
+        android:id="@id/android:list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/id_home_choose"
-        android:id="@+id/id_home_lv">
+        android:layout_below="@+id/id_home_choose">
 
-    </ListView>
+    </com.fandexian.tongxue.MyView.XListView>
 
 </RelativeLayout>

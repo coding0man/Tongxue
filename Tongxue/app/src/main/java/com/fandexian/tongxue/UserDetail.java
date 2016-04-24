@@ -132,6 +132,7 @@ public class UserDetail extends Activity implements View.OnClickListener{
                                 JSONObject jsonObject1 = jsonObject.getJSONObject("data");
                                 JsonHelper.toJavaBean(userInfo,jsonObject1.toString());
                                 JsonHelper.toJavaBean(editing_userInfo,jsonObject1.toString());
+                                Log.e("====>userId",editing_userInfo.getUserId()+"");
                                 setTexts();
                             }
 
@@ -161,9 +162,9 @@ public class UserDetail extends Activity implements View.OnClickListener{
     private void getTexts() {
         editing_userInfo.setNickName(et_nick.getText().toString().trim());
         if(rg_sex.getCheckedRadioButtonId() == R.id.id_detail_rb_male) {
-            userInfo.setUserSex("男");
+            editing_userInfo.setUserSex("男");
         }else{
-            userInfo.setUserSex("女");
+            editing_userInfo.setUserSex("女");
         }
         editing_userInfo.setUserQq(et_qq.getText().toString().trim());
         editing_userInfo.setUserWechat(et_wechat.getText().toString().trim());
@@ -242,7 +243,10 @@ public class UserDetail extends Activity implements View.OnClickListener{
         }){
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
-                return JsonHelper.toMap(editing_userInfo);
+                Map<String,String> map = new HashMap();
+                map = JsonHelper.toMap(editing_userInfo);
+                Log.e("====mapParameters",map.toString());
+                return map;
             }
         };
         editInfoRequest.setRetryPolicy(new DefaultRetryPolicy(Constants.initialTimeoutMs,1,1.0f));

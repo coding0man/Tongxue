@@ -22,8 +22,8 @@ public class UserInfo {
         return userId;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setUserId(String userId) {
+        this.userId = Integer.parseInt(userId);
     }
 
     public String getUserPhone() {

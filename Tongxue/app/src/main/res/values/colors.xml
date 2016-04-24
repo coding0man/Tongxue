@@ -10,4 +10,5 @@
     <color name="white">#FFFFFF</color>
     <color name="blackTextColor">#28282a</color>
     <color name="transparent">@android:color/transparent</color>
+    <color name="dividerColor">#b7b8be</color>
 </resources>

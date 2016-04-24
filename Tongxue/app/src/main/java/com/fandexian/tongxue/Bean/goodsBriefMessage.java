@@ -5,7 +5,7 @@ import java.sql.Timestamp;
 /**
  * Created by fandexian on 16/4/13.
  */
-public class goodsBriefMessage {
+public class GoodsBriefMessage {
     private int goodsId;
     private String goodsName;
     private Timestamp releaseTime;
@@ -13,15 +13,15 @@ public class goodsBriefMessage {
     private String goodsDescription;
     private String goodsImg1;
 
-    public goodsBriefMessage() {
+    public GoodsBriefMessage() {
     }
 
     public int getGoodsId() {
         return goodsId;
     }
 
-    public void setGoodsId(int goodsId) {
-        this.goodsId = goodsId;
+    public void setGoodsId(String goodsId) {
+        this.goodsId = Integer.parseInt(goodsId);
     }
 
     public String getGoodsName() {
@@ -44,8 +44,8 @@ public class goodsBriefMessage {
         return goodsPrice;
     }
 
-    public void setGoodsPrice(float goodsPrice) {
-        this.goodsPrice = goodsPrice;
+    public void setGoodsPrice(String goodsPrice) {
+        this.goodsPrice = Float.parseFloat(goodsPrice);
     }
 
     public String getGoodsDescription() {
