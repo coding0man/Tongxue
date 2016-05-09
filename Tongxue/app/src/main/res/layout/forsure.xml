@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        android:id="@+id/id_forsure_bg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/black"
+        android:alpha="0.2"/>
+    <RelativeLayout
+        android:layout_width="282dp"
+        android:layout_height="177dp"
+        android:layout_centerInParent="true"
+        android:background="@mipmap/icon_forsure_bg">
+        <TextView
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="32dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="确定退出登录？"
+            android:textSize="18dp"
+            android:textColor="@color/defaultTextColor"/>
+
+        <View
+            android:layout_centerInParent="true"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/dividerColor"
+            android:layout_marginLeft="32dp"
+            android:layout_marginRight="32dp" />
+
+        <LinearLayout
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="16dp"
+            android:layout_centerHorizontal="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/id_sure"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18dp"
+                android:textColor="@color/defaultTextColor"
+                android:text="确 定"
+                android:background="@color/transparent"/>
+            <Button
+
+                android:id="@+id/id_cancel"
+                android:layout_marginLeft="48dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18dp"
+                android:text="取 消"
+                android:textColor="@color/defaultTextColor"
+                android:background="@color/transparent"/>
+
+        </LinearLayout>
+    </RelativeLayout>
+
+
+
+</RelativeLayout>

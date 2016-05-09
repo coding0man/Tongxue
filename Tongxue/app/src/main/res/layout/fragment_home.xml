@@ -6,6 +6,8 @@
         android:id="@+id/id_home_title"
         layout="@layout/customer_title"/>
 
+
+
     <View
         android:id="@+id/id_home_divider1"
         android:layout_below="@+id/id_home_title"
@@ -18,7 +20,7 @@
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_below="@+id/id_home_divider1"
-        android:background="@color/white"
+        android:background="@color/mainBgColor"
         android:orientation="horizontal">
         <Button
             android:id="@+id/id_home_choose_campus"
@@ -27,16 +29,16 @@
             android:layout_marginStart="16dp"
             android:layout_gravity="center_vertical"
             android:text="校区"
-            android:drawableRight="@mipmap/icon_xiaoqu"/>
+            android:drawableRight="@mipmap/icon_down_arrow"/>
 
         <Button
+            android:id="@+id/id_home_choose_category"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/id_main_fenlei2"
             android:layout_marginStart="16dp"
             android:layout_gravity="center_vertical"
             android:text="品类"
-            android:drawableRight="@mipmap/icon_xiaoqu"/>
+            android:drawableRight="@mipmap/icon_down_arrow"/>
     </LinearLayout>
     <View
         android:id="@+id/id_home_divider2"
@@ -44,13 +46,33 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="@color/dividerColor"/>
-
-    <com.fandexian.tongxue.MyView.XListView
-        android:id="@id/android:list"
+    <RelativeLayout
+        android:layout_below="@+id/id_home_choose"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/id_home_choose">
+        android:layout_height="match_parent">
+        <RelativeLayout
+            android:id="@+id/id_home_progress"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="invisible">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/blackTextColor"
+                android:alpha="0.2"/>
+            <ProgressBar
+                android:layout_centerInParent="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </RelativeLayout>
 
-    </com.fandexian.tongxue.MyView.XListView>
+        <com.fandexian.tongxue.MyView.XListView
+            android:id="@id/android:list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        </com.fandexian.tongxue.MyView.XListView>
+    </RelativeLayout>
+
+
 
 </RelativeLayout>

@@ -7,6 +7,7 @@
     <color name="mainColor">#d03434</color>
     <color name="defaultTextColor">#80828d</color>
     <color name="mainBgColor">#F8f8f8</color>
+    <color name="black">#000000</color>
     <color name="white">#FFFFFF</color>
     <color name="blackTextColor">#28282a</color>
     <color name="transparent">@android:color/transparent</color>

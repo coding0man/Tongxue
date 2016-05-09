@@ -39,7 +39,8 @@
         <activity android:name=".UserDetail" />
         <activity android:name=".MyReleasedGoods" />
         <activity android:name=".MyColects" />
-        <activity android:name=".Setting"></activity>
+        <activity android:name=".Setting" />
+        <activity android:name=".GoodsDetail"></activity>
     </application>
 
 </manifest>

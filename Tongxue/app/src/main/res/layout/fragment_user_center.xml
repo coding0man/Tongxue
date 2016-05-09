@@ -75,7 +75,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="24dp"
-                android:text="已发布"
+                android:text="我的发布"
                 android:id="@+id/id_main_tv1"
                 style="@style/center_text"/>
         </LinearLayout>
@@ -95,7 +95,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="24dp"
-                android:text="已收藏"
+                android:text="我的收藏"
                 android:id="@+id/id_main_tv2"
                 style="@style/center_text"/>
         </LinearLayout>

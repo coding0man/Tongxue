@@ -72,6 +72,7 @@
     </style>
 
 
+    <!--====start=个人中心style===-->
     <style name="user_detail_linear_left_text">
         <item name="android:background">@color/transparent</item>
         <item name="android:layout_height">match_parent</item>
@@ -91,4 +92,73 @@
         <item name="android:textSize">16dp</item>
         <item name="android:paddingRight">@dimen/mid_margin</item>
     </style>
+    <!--===end个人中心style====-->
+
+
+
+    <style name="pop_campus_rl_text">
+        <item name="android:paddingLeft">16dp</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_weight">9</item>
+        <item name="android:layout_height">40dp</item>
+        <item name="android:textColor">@color/defaultTextColor</item>
+        <item name="android:textSize">16dp</item>
+        <item name="android:gravity">center_vertical</item>
+    </style>
+    <style name="pop_campus_rl_img">
+        <item name="android:visibility">invisible</item>
+        <item name="android:src">@mipmap/gou</item>
+        <item name="android:paddingRight">16dp</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_weight">3</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/defaultTextColor</item>
+        <item name="android:textSize">16dp</item>
+        <item name="android:gravity">center_vertical</item>
+    </style>
+
+
+    <style name="mypopwindow_anim_style">
+        <item name="android:windowEnterAnimation">@anim/popshow_anim</item>
+        <!-- 指定显示的动画xml -->
+
+        <item name="android:windowExitAnimation">@anim/pophidden_anim</item>
+        <!-- 指定消失的动画xml -->
+    </style>
+
+
+   <!--start_设置页面条目-->
+    <style name="setting_rl">
+        <item name="android:layout_marginTop">@dimen/mid_margin</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">48dp</item>
+        <item name="android:background">@color/white</item>
+    </style>
+    <style name="setting_rl_text">
+        <item name="android:layout_marginLeft">@dimen/mid_margin</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:textColor">@color/defaultTextColor</item>
+        <item name="android:textSize">16dp</item>
+    </style>
+
+
+    android:="@dimen/min_margin"
+    android:="true"
+    android:="true"
+    android:="25dp"
+    android:=""
+    android:=""
+    <style name="setting_rl_img">
+        <item name="android:layout_marginRight">@dimen/mid_margin</item>
+        <item name="android:layout_alignParentRight">true</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:layout_width">25dp</item>
+        <item name="android:layout_height">25dp</item>
+        <item name="android:src">@mipmap/icon_right_arrow</item>
+    </style>
+
+    <!--end_设置页面条目-->
+
 </resources>
